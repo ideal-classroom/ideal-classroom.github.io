@@ -1,4 +1,6 @@
 <script>
+    import SvelteTooltip from 'svelte-tooltip';
+
     let messages = [
         "Your child may want to consider switching subjects, as they seem to be struggling with this subject.",
         "Your child is under pressure due to the structure of the classes. Maybe consider switching to a smaller class or taking up homeschooling.",
@@ -38,7 +40,7 @@
         if (valid) {
             if (initial < 50) {
                 information = messages[0]
-            } else if (initial - percentage > 8) {
+            } else if (initial - percentage > 6) {
                 information = messages[1]
             } else {
                 information = messages[2]
@@ -59,7 +61,9 @@
         <label for="position">Class Position:</label>
         <input bind:value={position} id="position" type="number">
         <label for="students">Number of Students:</label>
-        <input bind:value={students} id="students" type="number">
+        <SvelteTooltip tip="Ensure that number is larger than 30" top color="#ffffff" >
+            <input bind:value={students} id="students" type="number">
+        </SvelteTooltip>
     </div>
 
     <button on:click={update}>Update</button>
@@ -85,10 +89,11 @@
         border: none;
         border-radius: 2px;
         padding: 5px 10px;
+        width: 100%;
     }
 
     button {
-        background-color: #2f1832;
+        background-color: #2a1c63;
         color: #fff;
         outline: none;
         border: none;

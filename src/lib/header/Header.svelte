@@ -1,10 +1,11 @@
 <script>
 	import { page } from '$app/stores';
+	import logo from "./logo.png"
 </script>
 
 <div class="header">
 	<ul>
-		<li class="branding desktop">Ideal Classroom</li>
+		<li class="branding"><img height="30em" src={logo} alt="Ideal Classroom"></li>
 		<li class:active={$page.url.pathname === '/'}><a href="/" preload="true">Home</a></li>
 		<li class:active={$page.url.pathname === '/about'}><a href="/about" preload="true">About</a></li>
 	</ul>
@@ -15,14 +16,11 @@
 		padding: 16px;
 		margin: 0;
 		width: 100%;
-		background-color: #2f1832;
-		color: #ffffff;
+		background-color: #ffffff;
+		color: #000000;
 		font-size: 1em;
         font-weight: 400;
         font-family: "Poppins", sans-serif;
-	}
-	.mobile {
-		display: none;
 	}
 	.active {
         font-weight: 600;
@@ -48,13 +46,5 @@
 	a {
 		color: inherit;
 		text-decoration: none;
-	}
-	@media screen and (max-width: 625px) {
-		.desktop {
-			display: none;
-		}
-		.mobile {
-			display: inline;
-		}
 	}
 </style>
