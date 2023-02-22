@@ -2,7 +2,6 @@
     import SvelteTooltip from 'svelte-tooltip';
 
     let messages = [
-        "Your child may want to consider switching subjects, as they seem to be struggling with this subject.",
         "Your child is under pressure due to the structure of the classes. Maybe consider switching to a smaller class or taking up homeschooling.",
         "Your child seems to be in a good position and their class structure is having little impact on thier marks." 
     ]
@@ -20,12 +19,12 @@
         if (initial != "" && position != "" && students != "") {
             percentage = initial * (Math.E ** ((-0.35 * ((position / students) ** 2)) / 2));
             if (!isNaN(percentage)) {
-                if (students >= 30) {
+                if (students >= 15) {
                     message = `Predicted Percentage: ${Math.round(percentage * 100) / 100}%`;
                     valid = true;
                 } else {
                     message = `Error`;
-                    information = "Algorithm only works with classes of 30 students or more.";
+                    information = "Algorithm only works with classes of 15 students or more.";
                 }
             }
             else {
@@ -38,12 +37,10 @@
         }
 
         if (valid) {
-            if (initial < 50) {
+            if (((initial - percentage) / initial) * 100 > 10) {
                 information = messages[0]
-            } else if (initial - percentage > 6) {
-                information = messages[1]
             } else {
-                information = messages[2]
+                information = messages[1]
             }
         }
     }
@@ -61,7 +58,7 @@
         <label for="position">Class Position:</label>
         <input bind:value={position} id="position" type="number">
         <label for="students">Number of Students:</label>
-        <SvelteTooltip tip="Ensure that number is larger than 30" top color="#ffffff" >
+        <SvelteTooltip tip="Ensure that number of students is larger than 15" top color="#ffffff" >
             <input bind:value={students} id="students" type="number">
         </SvelteTooltip>
     </div>
